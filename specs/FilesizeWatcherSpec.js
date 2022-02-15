@@ -1,7 +1,8 @@
 'use strict';
 
-var FilesizeWatcher = require('../src/FilesizeWatcher');
+var FilesizeWatcher = require('../src/FilesizeWatcher.js');
 var exec = require('child_process').exec;
+
 
 describe('FilesizeWatcher', function(){
     var watcher;
@@ -12,7 +13,7 @@ describe('FilesizeWatcher', function(){
 
     it('should fire a "grew" event when the file grew in size', function(done){
         var path = '/var/tmp/filesizewatcher.test';
-        exec('rm -f ' + path + ' ; touch ' + path, function(){
+        exec('rm -f ' + path + ' ; touch ' + path, function() {
             watcher = new FilesizeWatcher(path);
 
             watcher.on('grew', function(gain){
@@ -26,7 +27,7 @@ describe('FilesizeWatcher', function(){
 
     it('should fire a "shrank" event when the file shrunk in size', function(done){
         var path = '/var/tmp/filesizewatcher.test';
-        exec('rm -f ' + path + ' ; echo "test" > ' + path, function(){
+        exec('rm -f ' + path + ' ; echo "test" > ' + path, function() {
             watcher = new FilesizeWatcher(path);
 
             watcher.on('shrank', function(loss){
